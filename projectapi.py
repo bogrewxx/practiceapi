@@ -5,7 +5,7 @@ from telegram.ext import ApplicationBuilder, MessageHandler, CommandHandler, Con
 
 
 OMDB_API_KEY = "8750210"
-TELEGRAM_TOKEN = "7586998595:AAF7oV-lYaVNFHSdOfQPC1_RPDOwusC5aksdelllk"
+TELEGRAM_TOKEN = "///"
 OMDB_URL = "http://www.omdbapi.com/"
 
 
