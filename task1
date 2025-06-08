@@ -1,0 +1,41 @@
+import requests
+
+api_key = "cYvBFrBSsfMKHsA53mtTeBS8epvxZ2PQ"
+
+url = "https://api.apilayer.com/exchangerates_data/latest"
+
+params = {
+    "base": "USD",
+    "symbols": "UAH,EUR"
+}
+
+headers = {
+     "apikey": api_key
+ }
+
+
+response = requests.get(url, headers=headers, params=params)
+
+if response.status_code == 200:
+    data = response.json()
+    print("JSON відповідь:", data)
+
+    if "rates" in data:
+        usd_to_uah = data["rates"]["UAH"]
+        usd_to_eur = data["rates"]["EUR"]
+
+        
+        response_eur = requests.get(url, headers=headers, params={"base": "EUR", "symbols": "UAH"})
+        data_eur = response_eur.json()
+
+        if "rates" in data_eur:
+            eur_to_uah = data_eur["rates"]["UAH"]
+
+            print(f"Курс USD до UAH: {usd_to_uah:.2f}")
+            print(f"Курс EUR до UAH: {eur_to_uah:.2f}")
+        else:
+            print(" Помилка: Відповідь не містить 'rates' (EUR)")
+    else:
+        print(" Помилка: Відповідь не містить 'rates' (USD)")
+else: 
+    print  (f"Помилка пр отриманні данних: {response.status_code}")
